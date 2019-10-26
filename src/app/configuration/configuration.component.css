@@ -1,0 +1,10 @@
+.c-configuration__form {
+  --form-width: 100vw;
+  width: var(--form-width);
+}
+
+@media screen and (min-width: 700px) {
+  .c-configuration__form {
+    --form-width: 700px;
+  }
+}

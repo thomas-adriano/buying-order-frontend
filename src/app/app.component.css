@@ -1,0 +1,5 @@
+.c-app__content {
+  display: flex;
+  height: var(--app-content-height);
+  justify-content: center;
+}

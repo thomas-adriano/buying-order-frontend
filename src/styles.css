@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --top-bar-height: 2rem;
+  --app-content-height: calc(100vh - var(--top-bar-height));
+  --spacing-gutter: 1rem;
+  --height-md: 300px;
+  --height-sm: 150px;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.u-p-gutter {
+  padding: var(--spacing-gutter) !important;
+}
+
+.u-mb-xsm {
+  margin-bottom: 0.25rem !important;
+}
+
+.u-mb-md {
+  margin-bottom: 1rem !important;
+}
+
+.u-mt-xsm {
+  margin-bottom: 0.25rem !important;
+}
+
+.u-diplay-block {
+  display: block !important;
+}
+
+.u-w-100 {
+  width: 100% !important;
+}
+
+.u-overflow-x-hidden {
+  overflow-x: hidden !important;
+}
+
+.u-max-h-md {
+  max-height: var(--height-md) !important;
+}
+
+.u-visibility-hidden {
+  visibility: hidden !important;
+}
+
+.o-flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ck-content {
+  min-height: var(--height-sm);
+  max-height: var(--height-md);
+}

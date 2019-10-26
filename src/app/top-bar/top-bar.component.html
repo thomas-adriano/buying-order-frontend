@@ -1,0 +1,16 @@
+<mat-toolbar role="heading">
+  <mat-toolbar-row>
+    <span>{{ title }}</span>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      *ngIf="saveVisibilityChange$ | async"
+      (click)="onSaveClick()"
+    >
+      Salvar
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

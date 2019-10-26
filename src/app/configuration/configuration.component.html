@@ -1,0 +1,182 @@
+<form [formGroup]="formGroup" (submit)="onSubmit()">
+  <mat-tab-group class="c-configuration__form">
+    <mat-tab label="Cron">
+      <div class="u-p-gutter">
+        <mat-card>
+          <div class="o-flex-col-center">
+            <mat-form-field class="u-w-100 u-mb-md">
+              <input
+                matInput
+                formControlName="appCronPattern"
+                placeholder="Padrão cron"
+              />
+              <mat-hint
+                >(segundo 0-59) (minuto 0-59) (hora 0-23) (dia do mês 0-31) (mês
+                0-11) (dia da semana 0-6)</mat-hint
+              >
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appCronTimezone"
+                placeholder="Timezone"
+              />
+            </mat-form-field>
+          </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="E-mail">
+      <div class="u-p-gutter">
+        <mat-card>
+          <div class="o-flex-col-center u-overflow-x-hidden">
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appSMTPAddress"
+                placeholder="Endereço SMTP"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appSMTPPort"
+                placeholder="Porta"
+                type="number"
+              />
+            </mat-form-field>
+            <mat-checkbox formControlName="appSMTPSecure"
+              >SMTP Seguro</mat-checkbox
+            >
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appServerHost"
+                placeholder="Host do servidor"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appServerPort"
+                placeholder="Porta do servidor"
+                type="number"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appEmailUser"
+                placeholder="Usuário"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appEmailPassword"
+                placeholder="Senha"
+                type="password"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appEmailFrom"
+                placeholder="Endereço de e-mail do remetente"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appEmailName"
+                placeholder="Nome"
+              />
+              <mat-hint>Será exibido no remetente do e-mail</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appEmailSubject"
+                placeholder="Assunto do e-mail"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <textarea
+                matInput
+                formControlName="appEmailText"
+                placeholder="Texto do e-mail"
+                rows="10"
+              ></textarea>
+            </mat-form-field>
+            <div>
+              <mat-label for="editor" class="u-mb-xsm"
+                >Conteúdo HTML do e-mail</mat-label
+              >
+              <ckeditor
+                id="editor"
+                [editor]="editor"
+                formControlName="appEmailHtml"
+                class="u-max-h-md"
+              ></ckeditor>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Banco de Dados">
+      <div class="u-p-gutter">
+        <mat-card>
+          <div class="o-flex-col-center">
+            <mat-form-field class="u-w-100">
+              <input matInput formControlName="dbHost" placeholder="Host" />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="dbRootUser"
+                placeholder="Usuário root"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="dbRootPassword"
+                placeholder="Senha root"
+                type="password"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="dbAppUser"
+                placeholder="Usuário da aplicação"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="dbAppPassword"
+                placeholder="Senha do usuário da aplicação"
+                type="password"
+              />
+            </mat-form-field>
+            <mat-form-field class="u-w-100">
+              <input
+                matInput
+                formControlName="appDatabase"
+                placeholder="Database da aplicação"
+              />
+            </mat-form-field>
+          </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <button
+    class=" u-visibility-hidden"
+    type="submit"
+    [disabled]="submitDisabled"
+  >
+    Salvar
+  </button>
+</form>
