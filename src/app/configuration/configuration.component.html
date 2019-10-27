@@ -1,8 +1,12 @@
-<form [formGroup]="formGroup" (submit)="onSubmit()">
-  <mat-tab-group class="c-configuration__form">
+<form
+  class="o-flex-row-start u-w-100 "
+  [formGroup]="formGroup"
+  (submit)="onSubmit()"
+>
+  <mat-tab-group class="c-configuration__form u-w-100">
     <mat-tab label="Cron">
-      <div class="u-p-gutter">
-        <mat-card>
+      <div class="u-p-gutter o-flex-col-center">
+        <mat-card class="c-configuration__card">
           <div class="o-flex-col-center">
             <mat-form-field class="u-w-100 u-mb-md">
               <input
@@ -27,8 +31,8 @@
       </div>
     </mat-tab>
     <mat-tab label="E-mail">
-      <div class="u-p-gutter">
-        <mat-card>
+      <div class="u-p-gutter o-flex-col-center">
+        <mat-card class="c-configuration__card">
           <div class="o-flex-col-center u-overflow-x-hidden">
             <mat-form-field class="u-w-100">
               <input
@@ -124,8 +128,8 @@
       </div>
     </mat-tab>
     <mat-tab label="Banco de Dados">
-      <div class="u-p-gutter">
-        <mat-card>
+      <div class="u-p-gutter o-flex-col-center">
+        <mat-card class="c-configuration__card">
           <div class="o-flex-col-center">
             <mat-form-field class="u-w-100">
               <input matInput formControlName="dbHost" placeholder="Host" />
@@ -173,7 +177,7 @@
     </mat-tab>
   </mat-tab-group>
   <button
-    class=" u-visibility-hidden"
+    class="u-visibility-hidden u-position-absolute"
     type="submit"
     [disabled]="submitDisabled"
   >

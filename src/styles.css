@@ -2,6 +2,8 @@
   --top-bar-height: 2rem;
   --app-content-height: calc(100vh - var(--top-bar-height));
   --spacing-gutter: 1rem;
+  --width-md: 768px;
+  --width-sm: 320px;
   --height-md: 300px;
   --height-sm: 150px;
 }
@@ -51,13 +53,32 @@ body {
   visibility: hidden !important;
 }
 
+.u-position-absolute {
+  position: absolute !important;
+}
+
+.o-flex-row-center {
+  display: flex;
+  align-items: center;
+}
+
+.o-flex-row-start {
+  display: flex;
+  align-items: flex-start;
+}
+
 .o-flex-col-center {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
 .ck-content {
   min-height: var(--height-sm);
   max-height: var(--height-md);
+}
+
+.ck-toolbar__items {
+  display: flex;
+  flex-wrap: wrap !important;
 }
