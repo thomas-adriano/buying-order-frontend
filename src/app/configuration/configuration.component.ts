@@ -4,6 +4,8 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { TopBarService } from '../top-bar/top-bar.service';
 import { MatDialog } from '@angular/material';
 import { CheckFormDialogComponent } from './check-form-dialog/check-form-dialog.component';
+import { ConfigurationModel } from './configuration.model';
+import { ApiService } from '../core/api/api.service';
 
 @Component({
   selector: 'app-configuration',
@@ -18,7 +20,8 @@ export class ConfigurationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private topBarService: TopBarService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private api: ApiService
   ) {
     this.formGroup = this.fb.group({
       dbHost: [undefined, [Validators.required]],
@@ -49,7 +52,7 @@ export class ConfigurationComponent implements OnInit {
         appEmailHtml: '<p>Hello, world!</p>',
         appCronPattern: '* 0/5 * * * *',
         appCronTimezone: 'America/Sao_Paulo'
-      },
+      } as ConfigurationModel,
       { emitEvent: false }
     );
   }
@@ -69,8 +72,10 @@ export class ConfigurationComponent implements OnInit {
     if (this.formGroup.invalid) {
       this.openDialog();
     } else {
-      this.submitDisabled = true;
-      this.topBarService.hideSave();
+      this.api.postConfiguration(this.formGroup.value).subscribe(() => {
+        this.submitDisabled = true;
+        this.topBarService.hideSave();
+      });
     }
   }
 
