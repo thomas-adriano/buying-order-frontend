@@ -4,10 +4,22 @@
   (submit)="onSubmit()"
 >
   <mat-tab-group class="c-configuration__form u-w-100">
-    <mat-tab label="Cron">
+    <mat-tab label="Agendamento">
       <div class="u-p-gutter o-flex-col-center">
         <mat-card class="c-configuration__card">
           <div class="o-flex-col-center">
+            <mat-form-field class="u-w-100 u-mb-md">
+              <input
+                matInput
+                formControlName="appNotificationTriggerDelta"
+                placeholder="Intervalo mínimo"
+                type="number"
+              />
+              <mat-hint
+                >Ordens de compras com um número de dias maior ou igual a esse
+                serão incluidas no envio de e-mail</mat-hint
+              >
+            </mat-form-field>
             <mat-form-field class="u-w-100 u-mb-md">
               <input
                 matInput
@@ -123,54 +135,6 @@
                 class="u-max-h-md"
               ></ckeditor>
             </div>
-          </div>
-        </mat-card>
-      </div>
-    </mat-tab>
-    <mat-tab label="Banco de Dados">
-      <div class="u-p-gutter o-flex-col-center">
-        <mat-card class="c-configuration__card">
-          <div class="o-flex-col-center">
-            <mat-form-field class="u-w-100">
-              <input matInput formControlName="dbHost" placeholder="Host" />
-            </mat-form-field>
-            <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="dbRootUser"
-                placeholder="Usuário root"
-              />
-            </mat-form-field>
-            <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="dbRootPassword"
-                placeholder="Senha root"
-                type="password"
-              />
-            </mat-form-field>
-            <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="dbAppUser"
-                placeholder="Usuário da aplicação"
-              />
-            </mat-form-field>
-            <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="dbAppPassword"
-                placeholder="Senha do usuário da aplicação"
-                type="password"
-              />
-            </mat-form-field>
-            <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appDatabase"
-                placeholder="Database da aplicação"
-              />
-            </mat-form-field>
           </div>
         </mat-card>
       </div>

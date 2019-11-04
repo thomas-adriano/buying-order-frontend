@@ -1,10 +1,4 @@
 export interface ConfigurationModel {
-  dbHost: string;
-  dbRootUser: string;
-  dbRootPassword: string;
-  dbAppUser: string;
-  dbAppPassword: string;
-  appDatabase: string;
   appEmailName: string;
   appEmailUser: string;
   appEmailPassword: string;

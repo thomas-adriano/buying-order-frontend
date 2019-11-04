@@ -24,18 +24,12 @@ export class ConfigurationComponent implements OnInit {
     private api: ApiService
   ) {
     this.formGroup = this.fb.group({
-      dbHost: [undefined, [Validators.required]],
-      dbRootUser: [undefined, [Validators.required]],
-      dbRootPassword: [undefined, [Validators.required]],
-      dbAppUser: [undefined, [Validators.required]],
-      dbAppPassword: [undefined, [Validators.required]],
-      appDatabase: [undefined, [Validators.required]],
       appEmailName: [undefined, [Validators.required]],
       appEmailUser: [undefined, [Validators.required]],
       appEmailPassword: [undefined, [Validators.required]],
       appSMTPAddress: [undefined, [Validators.required]],
       appSMTPPort: [undefined, [Validators.required]],
-      appSMTPSecure: [undefined],
+      appSMTPSecure: [false],
       appEmailFrom: [undefined, [Validators.required, Validators.email]],
       appEmailSubject: [undefined, [Validators.required]],
       appEmailText: [undefined, [Validators.required]],
@@ -43,7 +37,8 @@ export class ConfigurationComponent implements OnInit {
       appServerHost: [undefined, [Validators.required]],
       appServerPort: [undefined, [Validators.required]],
       appCronPattern: [undefined, [Validators.required]],
-      appCronTimezone: [undefined, [Validators.required]]
+      appCronTimezone: [undefined, [Validators.required]],
+      appNotificationTriggerDelta: [undefined, [Validators.required]]
     });
 
     this.formGroup.patchValue(
@@ -61,7 +56,7 @@ export class ConfigurationComponent implements OnInit {
     this.formGroup.valueChanges.subscribe(v => {
       if (this.formGroup.dirty) {
         this.submitDisabled = false;
-        this.topBarService.showSave();
+        this.topBarService.enableSave();
       }
     });
     this.topBarService.saveClick().subscribe(() => this.onSubmit());
@@ -74,7 +69,7 @@ export class ConfigurationComponent implements OnInit {
     } else {
       this.api.postConfiguration(this.formGroup.value).subscribe(() => {
         this.submitDisabled = true;
-        this.topBarService.hideSave();
+        this.topBarService.disableSave();
       });
     }
   }

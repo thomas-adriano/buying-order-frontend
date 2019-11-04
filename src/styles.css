@@ -6,6 +6,13 @@
   --width-sm: 320px;
   --height-md: 300px;
   --height-sm: 150px;
+  --color-error: #f44336;
+  --color-warn: #ffeb3b;
+  --color-primary: #3f51b5;
+  --color-success: #4caf50;
+  --color-disabled: rgba(0, 0, 0, 0.12);
+  --color-white: #ffffff;
+  --color-text: var(--ck-color-base-text);
 }
 
 html,
@@ -27,6 +34,10 @@ body {
 
 .u-mb-md {
   margin-bottom: 1rem !important;
+}
+
+.u-mr-md {
+  margin-right: 1rem !important;
 }
 
 .u-mt-xsm {
@@ -67,6 +78,11 @@ body {
   align-items: flex-start;
 }
 
+.o-flex-row-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
 .o-flex-col-center {
   display: flex;
   flex-direction: column;
@@ -81,4 +97,44 @@ body {
 .ck-toolbar__items {
   display: flex;
   flex-wrap: wrap !important;
+}
+
+.u-bg-color-warn {
+  background-color: var(--color-warn) !important;
+}
+
+.u-bg-color-success {
+  background-color: var(--color-success) !important;
+}
+
+.u-bg-color-success:disabled {
+  background-color: var(--color-disabled) !important;
+}
+
+.u-color-white {
+  color: var(--color-white) !important;
+}
+
+.u-color-error {
+  color: var(--color-error) !important;
+}
+
+.u-color-warn {
+  color: var(--color-warn) !important;
+}
+
+.u-color-success {
+  color: var(--color-success) !important;
+}
+
+.u-color-primary {
+  color: var(--color-primary) !important;
+}
+
+.u-color-text {
+  color: var(--color-text) !important;
+}
+
+.u-w-100 {
+  width: 100% !important;
 }

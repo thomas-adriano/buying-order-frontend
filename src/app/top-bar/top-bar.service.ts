@@ -5,21 +5,21 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class TopBarService {
-  private showSaveSubject = new BehaviorSubject(false);
+  private enableSaveSubject = new BehaviorSubject(false);
   private saveClickSubject = new Subject<void>();
 
   constructor() {}
 
-  public showSave(): void {
-    this.showSaveSubject.next(true);
+  public enableSave(): void {
+    this.enableSaveSubject.next(true);
   }
 
-  public hideSave(): void {
-    this.showSaveSubject.next(false);
+  public disableSave(): void {
+    this.enableSaveSubject.next(false);
   }
 
-  public saveVisibilityChange(): Observable<boolean> {
-    return this.showSaveSubject.asObservable();
+  public saveEnabledChange(): Observable<boolean> {
+    return this.enableSaveSubject.asObservable();
   }
 
   public saveClick(): Observable<void> {
