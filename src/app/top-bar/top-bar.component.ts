@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { TopBarService } from './top-bar.service';
 import { ApiService } from '../core/api/api.service';
 import { Statuses } from './statuses';
+import { LoadingService } from '../core/loading/loading.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -18,22 +19,18 @@ export class TopBarComponent implements OnInit {
   public showPrimaryBg: boolean;
   public showWarnBg: boolean;
   public showErrorBg: boolean;
+  public startSchedulerDisabled = true;
+  public stopSchedulerDisabled = true;
   private reconnectInterval: any;
 
   constructor(
     private topBarService: TopBarService,
     private api: ApiService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private loadingChange: LoadingService
   ) {}
 
   ngOnInit() {
-    // setInterval(() => {
-    //   this.api.getStatus().subscribe(running => {
-    //     console.log(running);
-    //     this.statusStr = running ? 'Em execução' : 'Desligado';
-    //     this.cdr.detectChanges();
-    //   });
-    // }, 2000);
     this.createSocketConnection();
   }
 
@@ -45,56 +42,7 @@ export class TopBarComponent implements OnInit {
     };
 
     socket.onmessage = event => {
-      if (event.data === Statuses.INITIALIZING) {
-        this.statusStr = 'Inicializando';
-        this.showPrimaryBg = true;
-        this.showDefaultBg = false;
-        this.showErrorBg = false;
-        this.showSuccessBg = false;
-        this.showWarnBg = false;
-      }
-      if (event.data === Statuses.SERVER_ERROR) {
-        this.statusStr = 'Erro no Servidor';
-        this.showErrorBg = true;
-        this.showDefaultBg = false;
-        this.showSuccessBg = false;
-        this.showWarnBg = false;
-        this.showPrimaryBg = false;
-      }
-      if (event.data === Statuses.SERVER_RUNNING) {
-        this.statusStr = 'Servidor Online';
-        this.showSuccessBg = true;
-        this.showErrorBg = false;
-        this.showDefaultBg = false;
-        this.showWarnBg = false;
-        this.showPrimaryBg = false;
-      }
-      if (event.data === Statuses.SCHEDULER_ERROR) {
-        this.statusStr = 'Erro no Agendamento';
-        this.showErrorBg = true;
-        this.showDefaultBg = false;
-        this.showSuccessBg = false;
-        this.showWarnBg = false;
-        this.showPrimaryBg = false;
-      }
-      if (event.data === Statuses.SCHEDULER_RUNNING) {
-        this.statusStr = 'Agendamento Online';
-        this.showSuccessBg = true;
-        this.showErrorBg = false;
-        this.showDefaultBg = false;
-        this.showWarnBg = false;
-        this.showPrimaryBg = false;
-      }
-      if (event.data === Statuses.FINALIZING) {
-        this.statusStr = 'Servidor Offline';
-        this.showDefaultBg = true;
-        this.showErrorBg = false;
-        this.showSuccessBg = false;
-        this.showWarnBg = false;
-        this.showPrimaryBg = false;
-      }
-
-      this.cdr.detectChanges();
+      this.updateStatusDependencies(event.data);
     };
 
     socket.onclose = event => {
@@ -103,8 +51,6 @@ export class TopBarComponent implements OnInit {
           `[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`
         );
       } else {
-        // e.g. server process killed or network down
-        // event.code is usually 1006 in this case
         console.warn('[close] Connection died', event);
       }
       socket = undefined;
@@ -119,20 +65,87 @@ export class TopBarComponent implements OnInit {
     socket.onerror = error => {
       console.error(`[error] ${error}`);
       socket.close();
-      // socket = undefined;
-      // this.reconnectInterval = setInterval(() => {
-      //   socket = new WebSocket('ws://localhost:8989');
-      // }, 5000);
     };
 
     return socket;
   }
 
-  public onStartSchedulerStart(): void {}
+  public onStartSchedulerStart(): void {
+    this.loadingChange.setLoading(true);
+    this.api
+      .startEmailScheduling()
+      .subscribe(() => this.loadingChange.setLoading(false));
+  }
 
-  public onStopSchedulerStart(): void {}
+  public onStopSchedulerStart(): void {
+    this.loadingChange.setLoading(true);
+    this.api
+      .stopEmailScheduling()
+      .subscribe(() => this.loadingChange.setLoading(false));
+  }
 
   public onSaveClick(): void {
     this.topBarService.clickSave();
+  }
+
+  private updateStatusDependencies(status: Statuses): void {
+    this.stopSchedulerDisabled = true;
+    this.startSchedulerDisabled = true;
+
+    if (status === Statuses.INITIALIZING) {
+      this.statusStr = 'Inicializando';
+      this.showPrimaryBg = true;
+      this.showDefaultBg = false;
+      this.showErrorBg = false;
+      this.showSuccessBg = false;
+      this.showWarnBg = false;
+    }
+    if (status === Statuses.SERVER_RUNNING) {
+      this.statusStr = 'Servidor Online';
+      this.stopSchedulerDisabled = true;
+      this.startSchedulerDisabled = false;
+      this.showSuccessBg = true;
+      this.showErrorBg = false;
+      this.showDefaultBg = false;
+      this.showWarnBg = false;
+      this.showPrimaryBg = false;
+    }
+    if (status === Statuses.SCHEDULER_RUNNING) {
+      this.statusStr = 'Agendamento Online';
+      this.stopSchedulerDisabled = false;
+      this.startSchedulerDisabled = true;
+      this.showSuccessBg = true;
+      this.showErrorBg = false;
+      this.showDefaultBg = false;
+      this.showWarnBg = false;
+      this.showPrimaryBg = false;
+    }
+    if (status === Statuses.SERVER_ERROR) {
+      this.statusStr = 'Erro no Servidor';
+      this.showErrorBg = true;
+      this.showDefaultBg = false;
+      this.showSuccessBg = false;
+      this.showWarnBg = false;
+      this.showPrimaryBg = false;
+    }
+    if (status === Statuses.SCHEDULER_ERROR) {
+      this.statusStr = 'Erro no Agendamento';
+      this.showErrorBg = true;
+      this.showDefaultBg = false;
+      this.showSuccessBg = false;
+      this.showWarnBg = false;
+      this.showPrimaryBg = false;
+    }
+
+    if (status === Statuses.FINALIZING) {
+      this.statusStr = 'Servidor Offline';
+      this.showDefaultBg = true;
+      this.showErrorBg = false;
+      this.showSuccessBg = false;
+      this.showWarnBg = false;
+      this.showPrimaryBg = false;
+    }
+
+    this.cdr.detectChanges();
   }
 }

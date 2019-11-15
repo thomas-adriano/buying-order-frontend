@@ -9,8 +9,7 @@ export interface ConfigurationModel {
   appEmailSubject: string;
   appEmailText: string;
   appEmailHtml: string;
-  appServerHost: string;
-  appServerPort: number;
   appCronPattern: string;
   appCronTimezone: string;
+  appNotificationTriggerDelta: number;
 }

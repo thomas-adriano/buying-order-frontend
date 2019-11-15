@@ -1,4 +1,9 @@
 <app-top-bar [title]="title"></app-top-bar>
+<mat-spinner
+  *ngIf="loading"
+  [diameter]="50"
+  class="u-position-fixed o-center-xy-absolute"
+></mat-spinner>
 <section class="c-app__content">
   <router-outlet></router-outlet>
 </section>
