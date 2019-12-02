@@ -13,6 +13,6 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 call npm i -g npm
-npx http-server ./dist/browser -c-1 -p 8889
+npx http-server ./browser -c-1 -p 8889
 cd..
 pause
