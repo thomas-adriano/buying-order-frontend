@@ -9,7 +9,7 @@ IF %ERRORLEVEL% NEQ 0 (
 call npm -v
 IF %ERRORLEVEL% NEQ 0 (
     echo errorlevel %ERRORLEVEL%
-    choco install npm
+    choco install nodejs
 )
 
 call npm i -g npm
