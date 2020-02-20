@@ -1,6 +1,6 @@
 <app-top-bar [title]="title"></app-top-bar>
 <mat-spinner
-  *ngIf="loading"
+  *ngIf="loading$ | async"
   [diameter]="50"
   class="u-position-fixed o-center-xy-absolute"
 ></mat-spinner>

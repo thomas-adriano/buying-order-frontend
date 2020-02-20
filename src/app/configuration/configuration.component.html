@@ -16,7 +16,8 @@
                 type="number"
               />
               <mat-hint
-                >Número de dias considerados, relativos a data prevista da ordem de compra, para enviar notificações</mat-hint
+                >Número de dias considerados, relativos a data prevista da ordem
+                de compra, para enviar notificações</mat-hint
               >
             </mat-form-field>
             <mat-form-field class="u-w-100 u-mb-md">
@@ -36,6 +37,19 @@
                 formControlName="appCronTimezone"
                 placeholder="Timezone"
               />
+            </mat-form-field>
+
+            <mat-form-field class="u-w-100">
+              <textarea
+                matInput
+                formControlName="appBlacklist"
+                placeholder="Blacklist"
+                rows="10"
+              ></textarea>
+              <mat-hint
+                >Lista de e-mails, separados por virgula, que serão ignorados
+                pela rotina de envio de e-mails</mat-hint
+              >
             </mat-form-field>
           </div>
         </mat-card>
