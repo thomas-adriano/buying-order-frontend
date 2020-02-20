@@ -29,6 +29,7 @@ export class ConfigurationComponent implements OnInit {
     this.formGroup = this.fb.group({
       appEmailName: [undefined, [Validators.required]],
       appEmailUser: [undefined, [Validators.required]],
+      appBlacklist: [undefined],
       appEmailPassword: [undefined, [Validators.required]],
       appSMTPAddress: [undefined, [Validators.required]],
       appSMTPPort: [undefined, [Validators.required]],
@@ -75,7 +76,6 @@ export class ConfigurationComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.formGroup.value);
     if (this.formGroup.invalid) {
       this.openDialog();
     } else {
