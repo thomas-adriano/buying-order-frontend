@@ -1,6 +1,6 @@
 @echo off
 
-IF "%1" == "--update" (set UPDATE_TOOLS=false) else (set UPDATE_TOOLS=true)
+IF "%1" == "--update" (set UPDATE_TOOLS=true) else (set UPDATE_TOOLS=false)
 
 choco -v
 IF %ERRORLEVEL% NEQ 0 (
