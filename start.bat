@@ -18,6 +18,6 @@ if "%UPDATE_TOOLS%" == "true" (
     call npm i -g npm
 )
 
-npx http-server ./browser -c-1 -p 8889
+npx local-web-server --spa index.html --directory ./browser
 cd..
 pause
