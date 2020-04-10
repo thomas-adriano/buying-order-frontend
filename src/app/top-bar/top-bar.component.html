@@ -5,16 +5,20 @@
   <mat-toolbar-row class="u-h-auto u-p-gutter">
     <div class="o-flex-row-space-between u-flex-wrap u-w-100 u-overflow-x-auto">
       <div class="o-flex-row-start u-flex-wrap c-topbar__content--left">
-        <button
-          class="u-mr-md"
-          color="primary"
-          mat-raised-button
-          type="submit"
-          [disabled]="!(saveDisabledChange$ | async)"
-          (click)="onSaveClick()"
+        <div
+          matTooltip="É necessário parar o serviço para Salvar"
         >
-          Salvar
-        </button>
+            <button
+              class="u-mr-md"
+              color="primary"
+              mat-raised-button
+              type="submit"
+              [disabled]="!(saveDisabledChange$ | async) || disableSaveConfiguration()"
+              (click)="onSaveClick()"
+            >
+              Salvar
+            </button>
+        </div>
         <button
           [disabled]="startSchedulerDisabled"
           class="u-mr-md u-bg-color-success u-color-white"

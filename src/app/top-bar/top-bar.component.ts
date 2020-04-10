@@ -12,6 +12,7 @@ import { LoadingService } from '../core/loading/loading.service';
 export class TopBarComponent implements OnInit {
   @Input()
   public title = 'No Title';
+  public currentStatus: Statuses;
   public statusStr = 'Desligado';
   public saveDisabledChange$ = this.topBarService.saveEnabledChange();
   public showSuccessBg: boolean;
@@ -42,7 +43,8 @@ export class TopBarComponent implements OnInit {
     };
 
     socket.onmessage = event => {
-      this.updateStatusDependencies(event.data);
+      this.currentStatus = event.data;
+      this.updateStatusDependencies();
     };
 
     socket.onclose = event => {
@@ -88,9 +90,14 @@ export class TopBarComponent implements OnInit {
     this.topBarService.clickSave();
   }
 
-  private updateStatusDependencies(status: Statuses): void {
+  public disableSaveConfiguration(): boolean {
+    return !(this.currentStatus === Statuses.SERVER_RUNNING);
+  }
+
+  private updateStatusDependencies(): void {
     this.stopSchedulerDisabled = true;
     this.startSchedulerDisabled = true;
+    const status = this.currentStatus;
 
     if (status === Statuses.INITIALIZING) {
       this.statusStr = 'Inicializando';
