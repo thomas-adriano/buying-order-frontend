@@ -3,7 +3,7 @@ import { TopBarService } from './top-bar.service';
 import { ApiService } from '../core/api/api.service';
 import { Statuses } from './statuses';
 import { LoadingService } from '../core/loading/loading.service';
-import { Observable, from, Subscription, interval, throwError, of } from 'rxjs';
+import { Observable, from, Subscription, interval, throwError, of, BehaviorSubject } from 'rxjs';
 import * as signalR from '@microsoft/signalr';
 import { map, catchError, flatMap, tap, finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -17,6 +17,7 @@ import { JsonHubProtocol } from '@microsoft/signalr';
 export class TopBarComponent implements OnInit {
   @Input()
   public title = 'No Title';
+  public currentStatus: Statuses;
   public statusStr = 'Desligado';
   public saveEnabledChange$ = this.topBarService.saveEnabledChange();
   public showSuccessBg: boolean;
@@ -44,6 +45,7 @@ export class TopBarComponent implements OnInit {
     });
 
     this.api.getExecutionStatus().subscribe((status) => {
+      this.currentStatus = status.result.status;
       this.updateStatusDependencies(status.result.status);
     });
 
@@ -127,6 +129,10 @@ export class TopBarComponent implements OnInit {
 
   public onSaveClick(): void {
     this.topBarService.clickSave();
+  }
+
+  public disableSaveConfiguration(): boolean {
+    return this.currentStatus === Statuses.SchedulerRunning;
   }
 
   private updateStatusDependencies(status: Statuses): void {

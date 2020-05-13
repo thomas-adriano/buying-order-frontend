@@ -10,11 +10,12 @@
           color="primary"
           mat-raised-button
           type="submit"
+          [disabled]="disableSaveConfiguration()"
           (click)="onSaveClick()"
-          [disabled]="saveBtnDisabled"
         >
           Salvar
         </button>
+        <div matTooltip="É necessário parar o serviço para Salvar"></div>
         <button
           [disabled]="startSchedulerDisabled"
           class="u-mr-md u-bg-color-success u-color-white"
