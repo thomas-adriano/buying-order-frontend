@@ -1,8 +1,8 @@
 export enum Statuses {
-  INITIALIZING = 'INITIALIZING',
-  FINALIZING = 'FINALIZING',
-  SERVER_RUNNING = 'SERVER_RUNNING',
-  SCHEDULER_RUNNING = 'SCHEDULER_RUNNING',
-  SCHEDULER_ERROR = 'SCHEDULER_ERROR',
-  SERVER_ERROR = 'SERVER_ERROR'
+  Null = 0,
+  Offline = 'offline',
+  Initializing = 'initializing',
+  Online = 'online',
+  SchedulerRunning = 'schedulerRunning',
+  Finalizing = 'finalizing',
 }

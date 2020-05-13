@@ -1,18 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { TopBarService } from "../top-bar/top-bar.service";
-import { MatDialog } from "@angular/material";
-import { CheckFormDialogComponent } from "./check-form-dialog/check-form-dialog.component";
-import { ConfigurationModel } from "./configuration.model";
-import { ApiService } from "../core/api/api.service";
-import { BehaviorSubject } from "rxjs";
-import { LoadingService } from "../core/loading/loading.service";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { TopBarService } from '../top-bar/top-bar.service';
+import { MatDialog } from '@angular/material';
+import { CheckFormDialogComponent } from './check-form-dialog/check-form-dialog.component';
+import { ConfigurationModel } from './configuration.model';
+import { ApiService } from '../core/api/api.service';
+import { LoadingService } from '../core/loading/loading.service';
 
 @Component({
-  selector: "app-configuration",
-  templateUrl: "./configuration.component.html",
-  styleUrls: ["./configuration.component.css"]
+  selector: 'app-configuration',
+  templateUrl: './configuration.component.html',
+  styleUrls: ['./configuration.component.css'],
 })
 export class ConfigurationComponent implements OnInit {
   public editor = ClassicEditor;
@@ -41,37 +40,40 @@ export class ConfigurationComponent implements OnInit {
 
       appCronPattern: [undefined, [Validators.required]],
       appCronTimezone: [undefined, [Validators.required]],
-      appNotificationTriggerDelta: [undefined, [Validators.required]]
+      appNotificationTriggerDelta: [undefined, [Validators.required]],
     });
 
     this.formGroup.patchValue(
       {
-        appCronPattern: "0/60 * * * * *",
-        appCronTimezone: "America/Sao_Paulo",
+        appCronPattern: '0/60 * * * * *',
+        appCronTimezone: 'America/Sao_Paulo',
         appNotificationTriggerDelta: 1,
-        appSMTPAddress: "smtp.ethereal.email",
+        appSMTPAddress: 'smtp.ethereal.email',
         appSMTPPort: 587,
-        appEmailName: "Inspire Home",
-        appEmailUser: "viola.von@ethereal.email",
-        appEmailPassword: "Q61Z2qsRsmg7nUEzNG",
-        appEmailSubject: "Aviso de atraso"
+        appEmailName: 'Inspire Home',
+        appEmailUser: 'viola.von@ethereal.email',
+        appEmailPassword: '07c0f160c8d0039eab196fe9a3595cad',
+        appEmailSubject: 'Aviso de atraso',
       } as ConfigurationModel,
       { emitEvent: false }
     );
   }
 
   ngOnInit() {
-    this.formGroup.valueChanges.subscribe(v => {
+    this.formGroup.valueChanges.subscribe((v) => {
       if (this.formGroup.dirty) {
         this.submitDisabled = false;
         this.topBarService.enableSave();
       }
     });
     this.loadingService.setLoading(true);
-    this.api.getConfiguration().subscribe(configs => {
-      this.formGroup.patchValue(configs, { emitEvent: false });
-      this.loadingService.setLoading(false);
-    });
+    this.api.getConfiguration().subscribe(
+      (configs) => {
+        this.formGroup.patchValue(configs, { emitEvent: false });
+        this.loadingService.setLoading(false);
+      },
+      (err) => this.loadingService.setLoading(false)
+    );
     this.topBarService.saveClick().subscribe(() => this.onSubmit());
   }
 
@@ -90,11 +92,7 @@ export class ConfigurationComponent implements OnInit {
 
   private openDialog(): void {
     const dialogRef = this.dialog.open(CheckFormDialogComponent, {
-      width: "250px"
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
+      width: '250px',
     });
   }
 }

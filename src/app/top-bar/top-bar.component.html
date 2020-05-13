@@ -10,8 +10,8 @@
           color="primary"
           mat-raised-button
           type="submit"
-          [disabled]="!(saveDisabledChange$ | async)"
           (click)="onSaveClick()"
+          [disabled]="saveBtnDisabled"
         >
           Salvar
         </button>

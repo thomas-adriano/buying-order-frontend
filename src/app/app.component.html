@@ -1,9 +1,9 @@
 <app-top-bar [title]="title"></app-top-bar>
+<section class="c-app__content u-overflow-auto">
+  <router-outlet></router-outlet>
+</section>
 <mat-spinner
   *ngIf="loading$ | async"
   [diameter]="50"
-  class="u-position-fixed o-center-xy-absolute"
+  class="u-position-fixed o-center-xy-absolute u-max-z-index"
 ></mat-spinner>
-<section class="c-app__content">
-  <router-outlet></router-outlet>
-</section>
