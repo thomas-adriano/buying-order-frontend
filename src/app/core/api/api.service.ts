@@ -21,8 +21,8 @@ export class ApiService {
     return this.http.post(this.configurationApi(), configs);
   }
 
-  public getConfiguration(): Observable<ConfigurationModel> {
-    return this.http.get<ConfigurationModel>(this.configurationApi());
+  public getConfiguration(): Observable<ApiResponse<ConfigurationModel>> {
+    return this.http.get<ApiResponse<ConfigurationModel>>(this.configurationApi());
   }
 
   public getExecutionStatus(): Observable<ApiResponse<ExecutionStatus>> {

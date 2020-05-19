@@ -52,7 +52,7 @@ export class ConfigurationComponent implements OnInit {
         appSMTPPort: 587,
         appEmailName: 'Inspire Home',
         appEmailUser: 'viola.von@ethereal.email',
-        appEmailPassword: '07c0f160c8d0039eab196fe9a3595cad',
+        appEmailPassword: 'Q61Z2qsRsmg7nUEzNG',
         appEmailSubject: 'Aviso de atraso',
       } as ConfigurationModel,
       { emitEvent: false }
@@ -69,7 +69,7 @@ export class ConfigurationComponent implements OnInit {
     this.loadingService.setLoading(true);
     this.api.getConfiguration().subscribe(
       (configs) => {
-        this.formGroup.patchValue(configs, { emitEvent: false });
+        this.formGroup.patchValue(configs.result, { emitEvent: false });
         this.loadingService.setLoading(false);
       },
       (err) => this.loadingService.setLoading(false)
