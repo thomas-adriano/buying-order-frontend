@@ -26,37 +26,30 @@ export class ConfigurationComponent implements OnInit {
     private loadingService: LoadingService
   ) {
     this.formGroup = this.fb.group({
-      appEmailName: [undefined, [Validators.required]],
-      appEmailUser: [undefined, [Validators.required]],
+      appEmailName: ['Inspire Home', [Validators.required]],
+      appEmailUser: ['viola.von@ethereal.email', [Validators.required]],
       appBlacklist: [undefined],
-      appEmailPassword: [undefined, [Validators.required]],
-      appSMTPAddress: [undefined, [Validators.required]],
-      appSMTPPort: [undefined, [Validators.required]],
+      appEmailPassword: ['Q61Z2qsRsmg7nUEzNG', [Validators.required]],
+      appSMTPAddress: ['smtp.ethereal.email', [Validators.required]],
+      appSMTPPort: [587, [Validators.required]],
       appSMTPSecure: [false],
-      appEmailFrom: [undefined, [Validators.required, Validators.email]],
-      appEmailSubject: [undefined, [Validators.required]],
-      appEmailText: [undefined],
-      appEmailHtml: [undefined],
+      appEmailFrom: ['inspirehome@mail.com', [Validators.required, Validators.email]],
+      appEmailSubject: ['Olá ${providerName}', [Validators.required]],
 
-      appCronPattern: [undefined, [Validators.required]],
-      appCronTimezone: [undefined, [Validators.required]],
-      appNotificationTriggerDelta: [undefined, [Validators.required]],
+      appReplyLink: ['https://buying-order-agent-reply.firebaseapp.com/'],
+      appCronPattern: ['0/60 * * * * *', [Validators.required]],
+      appNotificationTriggerDelta: [5, [Validators.required]],
+      appEmailText: [
+        'Olá ${providerName}, como o pedido numero ${orderNumber}, ' +
+          'data ${orderDate} está prevista para ${previewOrderDate}. ' +
+          'Favor contatar ${orderContactName} ou informar nova data em ${replyLink}',
+      ],
+      appEmailHtml: [
+        'Olá ${providerName}, como o pedido numero ${orderNumber}, ' +
+          'data ${orderDate} está prevista para ${previewOrderDate}. ' +
+          'Favor contatar ${orderContactName} ou informar nova data em ${replyLink}',
+      ],
     });
-
-    this.formGroup.patchValue(
-      {
-        appCronPattern: '0/60 * * * * *',
-        appCronTimezone: 'America/Sao_Paulo',
-        appNotificationTriggerDelta: 1,
-        appSMTPAddress: 'smtp.ethereal.email',
-        appSMTPPort: 587,
-        appEmailName: 'Inspire Home',
-        appEmailUser: 'viola.von@ethereal.email',
-        appEmailPassword: 'Q61Z2qsRsmg7nUEzNG',
-        appEmailSubject: 'Aviso de atraso',
-      } as ConfigurationModel,
-      { emitEvent: false }
-    );
   }
 
   ngOnInit() {
@@ -82,11 +75,14 @@ export class ConfigurationComponent implements OnInit {
       this.openDialog();
     } else {
       this.loadingService.setLoading(true);
-      this.api.postConfiguration(this.formGroup.value).subscribe(() => {
-        this.submitDisabled = true;
-        this.topBarService.disableSave();
-        this.loadingService.setLoading(false);
-      });
+      this.api.postConfiguration(this.formGroup.value).subscribe(
+        () => {
+          this.submitDisabled = true;
+          this.topBarService.disableSave();
+          this.loadingService.setLoading(false);
+        },
+        (err) => this.loadingService.setLoading(false)
+      );
     }
   }
 

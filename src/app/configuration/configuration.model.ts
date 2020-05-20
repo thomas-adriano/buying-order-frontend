@@ -10,6 +10,6 @@ export interface ConfigurationModel {
   appEmailText: string;
   appEmailHtml: string;
   appCronPattern: string;
-  appCronTimezone: string;
+  appReplyLink: string;
   appNotificationTriggerDelta: number;
 }

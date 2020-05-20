@@ -1,8 +1,4 @@
-<form
-  class="o-flex-row-start u-w-100 "
-  [formGroup]="formGroup"
-  (submit)="onSubmit()"
->
+<form class="o-flex-row-start u-w-100" [formGroup]="formGroup" (submit)="onSubmit()">
   <mat-tab-group class="c-configuration__form u-w-100">
     <mat-tab label="Agendamento">
       <div class="u-p-gutter o-flex-col-center">
@@ -16,39 +12,27 @@
                 type="number"
               />
               <mat-hint
-                >Número de dias considerados, relativos a data prevista da ordem
-                de compra, para enviar notificações</mat-hint
+                >Número de dias considerados, relativos a data prevista da ordem de compra, para enviar
+                notificações</mat-hint
+              >
+            </mat-form-field>
+            <mat-form-field class="u-w-100 u-mb-md">
+              <input matInput formControlName="appCronPattern" placeholder="Padrão cron" />
+              <mat-hint
+                >(segundo 0-59) (minuto 0-59) (hora 0-23) (dia do mês 0-31) (mês 0-11) (dia da semana 0-6)</mat-hint
               >
             </mat-form-field>
             <mat-form-field class="u-w-100 u-mb-md">
               <input
                 matInput
-                formControlName="appCronPattern"
-                placeholder="Padrão cron"
-              />
-              <mat-hint
-                >(segundo 0-59) (minuto 0-59) (hora 0-23) (dia do mês 0-31) (mês
-                0-11) (dia da semana 0-6)</mat-hint
-              >
-            </mat-form-field>
-            <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appCronTimezone"
-                placeholder="Timezone"
+                formControlName="appReplyLink"
+                placeholder="Website para informar a nova data de retorno"
               />
             </mat-form-field>
-
             <mat-form-field class="u-w-100">
-              <textarea
-                matInput
-                formControlName="appBlacklist"
-                placeholder="Blacklist"
-                rows="10"
-              ></textarea>
+              <textarea matInput formControlName="appBlacklist" placeholder="Blacklist" rows="10"></textarea>
               <mat-hint
-                >Lista de e-mails, separados por virgula, que serão ignorados
-                pela rotina de envio de e-mails</mat-hint
+                >Lista de e-mails, separados por virgula, que serão ignorados pela rotina de envio de e-mails</mat-hint
               >
             </mat-form-field>
           </div>
@@ -60,89 +44,41 @@
         <mat-card class="c-configuration__card">
           <div class="o-flex-col-center u-overflow-x-hidden">
             <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appSMTPAddress"
-                placeholder="Endereço SMTP"
-              />
+              <input matInput formControlName="appSMTPAddress" placeholder="Endereço SMTP" />
             </mat-form-field>
             <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appSMTPPort"
-                placeholder="Porta"
-                type="number"
-              />
+              <input matInput formControlName="appSMTPPort" placeholder="Porta" type="number" />
             </mat-form-field>
-            <mat-checkbox formControlName="appSMTPSecure"
-              >SMTP Seguro</mat-checkbox
-            >
+            <mat-checkbox formControlName="appSMTPSecure">SMTP Seguro</mat-checkbox>
             <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appEmailUser"
-                placeholder="Usuário"
-              />
+              <input matInput formControlName="appEmailUser" placeholder="Usuário" />
             </mat-form-field>
             <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appEmailPassword"
-                placeholder="Senha"
-                type="password"
-              />
+              <input matInput formControlName="appEmailPassword" placeholder="Senha" type="password" />
             </mat-form-field>
             <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appEmailFrom"
-                placeholder="Endereço de e-mail do remetente"
-              />
+              <input matInput formControlName="appEmailFrom" placeholder="Endereço de e-mail do remetente" />
             </mat-form-field>
             <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appEmailName"
-                placeholder="Nome"
-              />
+              <input matInput formControlName="appEmailName" placeholder="Nome" />
               <mat-hint>Será exibido no remetente do e-mail</mat-hint>
             </mat-form-field>
             <mat-form-field class="u-w-100">
-              <input
-                matInput
-                formControlName="appEmailSubject"
-                placeholder="Assunto do e-mail"
-              />
+              <input matInput formControlName="appEmailSubject" placeholder="Assunto do e-mail" />
             </mat-form-field>
             <mat-form-field class="u-w-100">
-              <textarea
-                matInput
-                formControlName="appEmailText"
-                placeholder="Texto do e-mail"
-                rows="10"
-              ></textarea>
+              <textarea matInput formControlName="appEmailText" placeholder="Texto do e-mail" rows="10"></textarea>
             </mat-form-field>
             <div>
-              <mat-label for="editor" class="u-mb-xsm"
-                >Conteúdo HTML do e-mail</mat-label
-              >
-              <ckeditor
-                id="editor"
-                [editor]="editor"
-                formControlName="appEmailHtml"
-                class="u-max-h-md"
-              ></ckeditor>
+              <mat-label for="editor" class="u-mb-xsm">Conteúdo HTML do e-mail</mat-label>
+              <ckeditor id="editor" [editor]="editor" formControlName="appEmailHtml" class="u-max-h-md"></ckeditor>
             </div>
           </div>
         </mat-card>
       </div>
     </mat-tab>
   </mat-tab-group>
-  <button
-    class="u-visibility-hidden u-position-absolute"
-    type="submit"
-    [disabled]="submitDisabled"
-  >
+  <button class="u-visibility-hidden u-position-absolute" type="submit" [disabled]="submitDisabled">
     Salvar
   </button>
 </form>
