@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppComponent implements AfterViewInit {
   public loading$ = new BehaviorSubject(false);
-  public title = 'buying-order-agent-frontend';
+  public title = 'buying-order-frontend';
 
   constructor(private loadingService: LoadingService) {}
 
