@@ -42,12 +42,12 @@ export class ConfigurationComponent implements OnInit {
       appEmailText: [
         'Olá ${providerName}, como o pedido numero ${orderNumber}, ' +
           'data ${orderDate} está prevista para ${previewOrderDate}. ' +
-          'Favor contatar ${orderContactName} ou informar nova data em ${replyLink}',
+          'Favor contatar ${orderContactName} ou informar nova data ${replyLinkBegin}aqui${replyLinkEnd}',
       ],
       appEmailHtml: [
         'Olá ${providerName}, como o pedido numero ${orderNumber}, ' +
           'data ${orderDate} está prevista para ${previewOrderDate}. ' +
-          'Favor contatar ${orderContactName} ou informar nova data em ${replyLink}',
+          'Favor contatar ${orderContactName} ou informar nova data em ${replyLinkBegin}',
       ],
     });
   }
