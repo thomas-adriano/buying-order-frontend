@@ -132,7 +132,7 @@ export class TopBarComponent implements OnInit {
   }
 
   public disableSaveConfiguration(): boolean {
-    return this.currentStatus === Statuses.SchedulerRunning;
+    return this.currentStatus === Statuses.SchedulerRunning || this.saveBtnDisabled;
   }
 
   private updateStatusDependencies(status: Statuses): void {
